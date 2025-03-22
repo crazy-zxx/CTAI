@@ -5,6 +5,11 @@
 医生只需通过web上传ct图像文件，后台就会使用训练好的模型进行肿瘤区域的分割，然后将勾画好肿瘤区域的图像返回，还有肿瘤区域的一些特征（如面积、周长、强度等），并且提供前几次诊断的特征数据并绘制成图表进行对比来辅助医生诊断。  
 <img width="600" height="100" src="https://github.com/xming521/picture/blob/master/QQ截图20200218193846.png"/>
 
+## 系统结构介绍
+整个系统采取前后分离的方案，确保足够轻量，低耦合。后端采用Python的Flask库，能与AI框架更好的结合，使得系统能更高内聚。  
+后端运行流程如下：  
+<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片1.png"/>  
+
 ## 系统截图
 <img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片32.png"/>
 <img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片31.png"/>
@@ -21,8 +26,8 @@ CTAI
 │   ├── core
 │   ├── data
 │   ├── static
-│   ├── tmp
-│   ├── uploads
+│   ├── tmp                     # 临时目录，保存上传图像的中间处理过程的图像
+│   ├── uploads                 # 保存上传图像的目录
 │   ├── app_onnx.py
 │   ├── best_unet_model.onnx
 │   └── to_oonx.py
@@ -255,16 +260,3 @@ pm2 delete [id]
 训练过程如下：  
 <img width="50%" height="50%" src="https://github.com/xming521/picture/blob/master/图片4.png"/>  
 
-## 后端介绍
-整个系统采取前后分离的方案，确保足够轻量，低耦合。后端采用Python的Flask库，能与AI框架更好的结合，使得系统能更高内聚。  
-后端运行流程如下：  
-<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片1.png"/>  
-
-目录管理：  
-|  目录   | 功能  |
-|  ----  | ----  |
-| uploads	| 		直接上传目录   | 
-| tmp/ct	| 		dcm文件副本目录 | 
-| tmp/image| 		dcm读取转换为png目录| 
-| tmp/mask	| 	预测结果肿瘤掩膜目录| 
-| tmp/draw	| 	勾画肿瘤后处理结果目录| 
