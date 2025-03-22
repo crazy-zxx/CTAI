@@ -5,6 +5,11 @@
 医生只需通过web上传ct图像文件，后台就会使用训练好的模型进行肿瘤区域的分割，然后将勾画好肿瘤区域的图像返回，还有肿瘤区域的一些特征（如面积、周长、强度等），并且提供前几次诊断的特征数据并绘制成图表进行对比来辅助医生诊断。  
 <img width="600" height="100" src="https://github.com/xming521/picture/blob/master/QQ截图20200218193846.png"/>
 
+## 系统截图
+<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片32.png"/>
+<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片31.png"/>
+<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片2(1).png"/>
+
 
 ## 觉得不错欢迎给star⭐哦
 
@@ -263,8 +268,3 @@ pm2 delete [id]
 | tmp/image| 		dcm读取转换为png目录| 
 | tmp/mask	| 	预测结果肿瘤掩膜目录| 
 | tmp/draw	| 	勾画肿瘤后处理结果目录| 
-
-## 系统截图
-<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片32.png"/>
-<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片31.png"/>
-<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片2(1).png"/>
