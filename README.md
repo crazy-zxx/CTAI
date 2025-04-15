@@ -247,6 +247,9 @@ pm2 delete [id]
 
 ## 模型权重下载
 
+[百度网盘：https://pan.baidu.com/s/16sRc4xP_mkWgO7E_xQoJFw?pwd=4zkh](https://pan.baidu.com/s/16sRc4xP_mkWgO7E_xQoJFw?pwd=4zkh)
+
+
 [pth模型](http://47.237.94.141:5244/%E6%95%B0%E6%8D%AE/best_unet_model.pth)
 
 [onnx模型](http://47.237.94.141:5244/%E6%95%B0%E6%8D%AE/best_unet_model.onnx)
