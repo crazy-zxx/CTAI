@@ -77,8 +77,8 @@
                     <el-form-item label="部位">
                         <el-input v-model="patient.body_part" placeholder="请输入部位"></el-input>
                     </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" @click="loadPatientInfo">加载患者信息</el-button>
+                    <el-form-item label-width="0">
+                      <el-button type="primary" style="width: 100%;" @click="loadPatientInfo">加载 / 保存患者信息</el-button>
                     </el-form-item>
                 </el-form>
             </el-card>
@@ -409,7 +409,6 @@
                 feat_list: [],
                 url: "",
                 visible: false,
-                activeName: "second",
                 wait_return: "等待上传",
                 wait_upload: "等待上传",
                 loading: false,
@@ -484,7 +483,7 @@
                 return url;
             },
             // 点击切换
-            handleClick(tab, event) {
+            handleClick(tab) {
                 if (tab.name == "second") {
                     this.loadHistoryDiagnoses();
                     this.drawChart();
@@ -621,16 +620,13 @@
 
                         this.feature_list.push(response.data.image_info);
                         this.feature_list_1 = this.feature_list[0];
-                        JSON.stringify(response.data.image_info, (key, value) => {
-                            console.log(key);
-                            console.log(value);
-                        });
+                        JSON.stringify(response.data.image_info);
                         this.dialogTableVisible = false;
                         this.percentage = 0;
                         this.notice1();
                         var areaCompare = document.getElementById("areaCompare");
                         areaCompare.style.display = "none";
-                        var areaCompare = document.getElementById("perimeterCompare");
+                        areaCompare = document.getElementById("perimeterCompare");
                         areaCompare.style.display = "none";
                         let myChart_area = this.$echarts.init(
                             document.getElementById("area")
@@ -701,7 +697,7 @@
                             ]
                         });
                         // 保存诊断结果到数据库
-                        this.saveDiagnosisResult(response.data.image_info);
+                        this.saveDiagnosisResult();
                     });
                 },
             // 下载 点击按钮从服务器获取文件
@@ -734,7 +730,7 @@
             myFunc() {
                 if (this.percentage + 33 < 99) {
                     this.percentage = this.percentage + 33;
-                    console.log(this.percentage);
+                    // console.log(this.percentage);
                 } else {
                     this.percentage = 99;
                 }
@@ -759,7 +755,7 @@
 
                     grid: {
                         //显示数据的图表位于当前canvas的坐标轴
-                        x: 40, 
+                        x: 40,
                         y: 55,
                         x2: 80,
                         y2: 140, // 增加y2值，为x轴标签留出更多空间
@@ -820,7 +816,7 @@
 
                     grid: {
                         //显示数据的图表位于当前canvas的坐标轴
-                        x: 40, 
+                        x: 40,
                         y: 55,
                         x2: 80,
                         y2: 140, // 增加y2值，为x轴标签留出更多空间
@@ -870,7 +866,7 @@
                 });
             },
             // 创建模板下载链接
-            downloads(data, name) {
+            downloads(data) {
                 if (!data) {
                     return;
                 }
@@ -936,8 +932,8 @@
                         this.$message.warning('未找到该患者信息');
                     }
                 }).catch(error => {
-                    this.$message.error('加载患者信息失败');
-                    console.error(error);
+                    this.$message.error('加载患者信息失败', error);
+                    // console.error(error);
                 });
             },
             // 从数据库加载历史诊断数据
@@ -960,8 +956,8 @@
                         this.$message.warning('未找到该患者的历史诊断数据');
                     }
                 }).catch(error => {
-                    this.$message.error('加载历史诊断数据失败');
-                    console.error(error);
+                    this.$message.error('加载历史诊断数据失败', error);
+                    // console.error(error);
                 });
             },
             // 更新图表
@@ -978,9 +974,9 @@
                     // 提取诊断时间并格式化（包含时分秒）
                     const diagnosisDates = diagnoses.map(d => {
                         const date = new Date(d.diagnosis_date);
-                        return date.toLocaleString('zh-CN', { 
-                            year: 'numeric', 
-                            month: '2-digit', 
+                        return date.toLocaleString('zh-CN', {
+                            year: 'numeric',
+                            month: '2-digit',
                             day: '2-digit',
                             hour: '2-digit',
                             minute: '2-digit',
@@ -993,7 +989,7 @@
                     myChart_area.setOption({
                         grid: {
                             // 调整网格位置，增加x轴下方空间和左侧空间
-                            x: 40, 
+                            x: 40,
                             y: 55,
                             x2: 80,
                             y2: 140, // 增加y2值，为x轴标签留出更多空间
@@ -1081,7 +1077,7 @@
                 }
             },
             // 保存诊断结果到数据库
-            saveDiagnosisResult(image_info) {
+            saveDiagnosisResult() {
                 // 诊断结果已经在后端保存，重新加载历史数据更新图表
                 this.$message.success('诊断结果已保存到数据库');
                 // 重新加载历史诊断数据以更新图表
@@ -1094,13 +1090,6 @@
                     return;
                 }
 
-                // 添加用户消息
-                this.aiMessages.push({
-                    content: '测试模型连通性',
-                    type: 'user',
-                    timestamp: new Date().toLocaleString()
-                });
-
                 // 添加AI响应占位
                 const aiMessage = {
                     content: '',
@@ -1109,8 +1098,6 @@
                     loading: true,
                     timestamp: new Date().toLocaleString()
                 };
-
-                this.aiMessages.push(aiMessage);
 
                 // 调用AI模型API测试连通性
                 this.streamTestConnection(aiMessage);
@@ -1155,6 +1142,7 @@
 
                     let fullContent = '';
 
+                    // eslint-disable-next-line no-constant-condition
                     while (true) {
                         const { done, value } = await reader.read();
 
@@ -1194,13 +1182,13 @@
                                     message.content = fullContent;
                                     message.displayContent = fullContent;
                                 } catch (error) {
-                                    console.error('解析响应失败:', error);
+                                    // console.error('解析响应失败:', error);
                                 }
                             }
                         }
                     }
                 } catch (error) {
-                    console.error('测试模型连通性失败:', error);
+                    // console.error('测试模型连通性失败:', error);
                     message.loading = false;
                     message.content = `测试失败: ${error.message}`;
                     this.$message.error('模型连通性测试失败，请检查网络连接或API设置');
@@ -1287,6 +1275,7 @@
 
                     let fullContent = '';
 
+                    // eslint-disable-next-line no-constant-condition
                     while (true) {
                         const { done, value } = await reader.read();
 
@@ -1319,13 +1308,13 @@
                                     message.content = fullContent;
                                     message.displayContent = fullContent;
                                 } catch (error) {
-                                    console.error('解析响应失败:', error);
+                                    // console.error('解析响应失败:', error);
                                 }
                             }
                         }
                     }
                 } catch (error) {
-                    console.error('调用AI模型失败:', error);
+                    // console.error('调用AI模型失败:', error);
                     message.loading = false;
                     message.content = `调用AI模型失败: ${error.message}`;
                 }
@@ -1344,7 +1333,7 @@
                         return null;
                     }
                 } catch (error) {
-                    console.error('获取患者数据失败:', error);
+                    // console.error('获取患者数据失败:', error);
                     return null;
                 }
             },
@@ -1442,7 +1431,7 @@
                 try {
                     localStorage.setItem('aiSettings', JSON.stringify(settings));
                 } catch (error) {
-                    console.error('保存AI设置失败:', error);
+                    // console.error('保存AI设置失败:', error);
                 }
             },
             // 从localStorage加载AI设置
@@ -1453,7 +1442,7 @@
                         this.aiSettings = JSON.parse(savedSettings);
                     }
                 } catch (error) {
-                    console.error('加载AI设置失败:', error);
+                    // console.error('加载AI设置失败:', error);
                 }
             },
             // 手动保存AI设置
@@ -1464,7 +1453,7 @@
                     // 保存成功后自动收起设置面板
                     this.showAiSettings = false;
                 } catch (error) {
-                    console.error('保存AI设置失败:', error);
+                    // console.error('保存AI设置失败:', error);
                     this.$message.error('保存AI设置失败');
                 }
             }
@@ -1626,7 +1615,6 @@
     height: 40%;
     /* background-color: RGB(239, 249, 251); */
     margin: 0px auto;
-    padding: 0px auto;
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04); */
     margin-right: 180px;
     margin-bottom: 0px;
