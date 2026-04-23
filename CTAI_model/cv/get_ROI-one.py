@@ -24,7 +24,7 @@ ret, img = cv2.threshold(img, 150, 255, cv2.THRESH_BINARY_INV)
 
 xxx = img
 # 提取分割结果中的轮廓，并填充孔洞
-im2, contours, x = cv2.findContours(img.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+contours, x = cv2.findContours(img.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 # 需要反色处理一下  现在找的是白色的  应该是黑色的
 
 # mask = np.zeros(img.shape, np.uint8)

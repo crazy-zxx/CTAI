@@ -1,17 +1,7 @@
 <template>
     <div id="Header">
-        <!-- 免费咨询 -->
-        <div class="top-left-edition">
-      <span style="color:#21b3b9;font-weight:bold;">
-        <i class="el-icon-phone-outline" style="font-size:23px;"></i>免费咨询：010-12345678
-      </span>
-            <span>
-        <i class="el-icon-time" style="font-size:23px;"></i>工作时间：8:00-18:00
-      </span>
-        </div>
         <!-- CT图像处理字（可删除放图片） -->
         <div id="word">
-
             <h1>{{msg}}</h1>
         </div>
     </div>
@@ -27,6 +17,7 @@
         },
         methods: {
             handleSelect(key, keyPath) {
+                // eslint-disable-next-line no-console
                 console.log(key, keyPath);
             }
         }
@@ -34,32 +25,27 @@
 </script>
 <style scoped>
     #Header {
-        padding: 30px 110px 0 150px;
+        padding: 30px 0 0 0;
         width: 90%;
         margin: 10px auto;
     }
 
     #word {
-        margin-left: 45%;
-        margin-top: -35px;
-        margin-bottom: 37px;
+        margin: 0 auto;
         height: 60px;
         /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04); */
-        line-height: 3.2em;
+        line-height: 60px;
+        text-align: center;
     }
 
     h1 {
-        /*text-align: center;*/
         color: #21b3b9;
-        letter-spacing: 30px;
+        letter-spacing: 20px;
         font-size: 2.3em;
+        margin: 0;
+        text-indent: 20px;
     }
 
-    .el-menu-demo {
-        width: 80%;
-        margin: 0px auto;
-        padding: 0px auto;
-    }
 
     .top-left-edition span i {
         float: left;

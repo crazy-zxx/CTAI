@@ -1,12 +1,12 @@
 Flask
 Werkzeug
 pandas
-numpy==1.23.0
+numpy
 Pillow
 SimpleITK
 matplotlib
-numba==0.50.1
+numba
 pydicom
-opencv-python==3.4.8.29
+opencv-python
 onnxruntime
 gevent

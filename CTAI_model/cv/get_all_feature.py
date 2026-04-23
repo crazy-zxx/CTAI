@@ -6,7 +6,6 @@ import cv2
 import numpy as np
 import SimpleITK as sitk
 import pandas as pd
-from numba import jit
 import inspect
 import csv
 
@@ -62,7 +61,6 @@ def glcm(img_gray, ngrad=16, ngray=16):
     get_glcm_features(gray_grad)
 
 
-@jit
 def get_gray_feature():
     # 灰度特征提取算法
     hist = cv2.calcHist([image_ROI_uint8[index]], [0], None, [256], [0, 256])
@@ -127,7 +125,7 @@ def get_glcm_features(mat):
 
 def get_geometry_feature():
     # 形态特征  分割mask获得一些特征
-    im2, contours, x = cv2.findContours(mask_array.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    contours, x = cv2.findContours(mask_array.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     tarea = []
     tperimeter = []
     for c in contours:

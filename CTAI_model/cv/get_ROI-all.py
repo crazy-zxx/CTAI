@@ -34,7 +34,7 @@ def get_roi(path):
     # 对图像进行阈值分割
     ret, img = cv2.threshold(img, 150, 255, cv2.THRESH_BINARY_INV)
     # 提取分割结果中的轮廓，并填充孔洞
-    im2, contours, x = cv2.findContours(img.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    contours, x = cv2.findContours(img.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     area = []
     for c in contours:
         area.append(cv2.contourArea(c))

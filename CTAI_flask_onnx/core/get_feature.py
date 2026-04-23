@@ -3,8 +3,8 @@ import SimpleITK as sitk
 import cv2
 import numpy as np
 import pandas as pd
-from numba import jit
 import warnings
+
 from numba import NumbaWarning
 
 # 禁止科学表示法，直接输出小数值
@@ -31,7 +31,6 @@ def get_variable_name(variable):
     return [var_name for var_name, var_val in callers_local_vars if var_val is variable]
 
 
-@jit
 def glcm(img_gray, ngrad=16, ngray=16):
     '''Gray Level-Gradient Co-occurrence Matrix,取归一化后的灰度值、梯度值分别为16、16'''
     # 利用sobel算子计算x-y方向上的梯度值
@@ -129,7 +128,7 @@ def get_glcm_features(mat):
 
 def get_geometry_feature():
     '''形态特征提取'''
-    im2, contours, _ = cv2.findContours(mask_array.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(mask_array.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     tarea, tperimeter = [], []
 
     for c in contours:
