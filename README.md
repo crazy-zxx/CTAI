@@ -11,9 +11,8 @@
 <img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片1.png"/>  
 
 ## 系统截图
-<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片32.png"/>
-<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片31.png"/>
-<img width="60%" height="60%" src="https://github.com/xming521/picture/blob/master/图片2(1).png"/>
+<img width="60%" height="60%" src="system_images/1.png"/>
+<img width="60%" height="60%" src="system_images/2.png"/>
 
 
 ## 觉得不错欢迎给star⭐哦
