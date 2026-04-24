@@ -1258,7 +1258,7 @@
                                 },
                                 {
                                     role: 'user',
-                                    content: `请分析以下患者的肿瘤变化情况：\n\n患者信息：${JSON.stringify(patientData.patient_info, null, 2)}\n\n历史诊断数据：${JSON.stringify(patientData.diagnosis_history, null, 2)}\n\n请提供详细的分析结果，包括肿瘤变化趋势、形态特征变化、治疗效果评估和建议。`
+                                    content: `请分析以下患者的肿瘤变化情况：\n\n患者信息：${JSON.stringify(patientData.patient_info, null, 2)}\n\n历史诊断数据：${JSON.stringify(patientData.diagnosis_history, null, 2)}\n\n请提供详细的分析结果，包括肿瘤变化趋势、形态特征变化、治疗效果评估和建议。不要使用markdown排版，使用合适的排版形式，确保网页渲染美观！`
                                 }
                             ],
                             stream: true
