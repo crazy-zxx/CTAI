@@ -61,7 +61,7 @@ CTAI
 
 
 ## 开发环境
-- **Python 3.8**: **PyTorch 1.10.0** , OpenCV 3, Flask, onnxruntime
+- **Python 3.8**: **PyTorch 1.10.0** , OpenCV 4.x, Flask, onnxruntime
 - **Node 22**: axios , ElementUI , ECharts
 - Vue: Vue-cli
 - Chrome（内核版本60以上）
@@ -89,8 +89,7 @@ pip install -r requirements.txt
 
 注意，在 requirements.txt 中:
 ```plain
-numpy==1.23.0               # 差不多相近的版本就行，不能太新
-opencv-python==3.4.8.29     # 差不多相近的版本就行，不能用 4.x 版本的
+opencv-python==4.13.0.92    # 支持最新的版本，应该不能用 3.x 版本的
 onnxruntime                 # 只有使用onnx在cpu上进行生产环境部署时使用
 gevent                      # 只有使用onnx在cpu上进行生产环境部署时使用
 ```
